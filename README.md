@@ -188,7 +188,7 @@ pantalla final todavía hay datos sin enviar, aparece un enlace para descargarlo
 | `etiqueta` | etiqueta mostrada: `original` / `ia` |
 | `etiqueta_verdadera` | TRUE si `fuente == etiqueta` (vacío en práctica) |
 | `celda` | 0–3 según la tabla de arriba |
-| `valor`, `agrado`, `profundidad` | respuestas 1–7 |
+| `agrado`, `valor`, `profundidad` | respuestas 1–7, en el orden en que se preguntan. `agrado`: «¿Cuánto te gusta esta obra?». `valor`: «Más allá de si te gusta o no, ¿qué tan buena te parece como obra de arte?». `profundidad`: «¿Qué tan profunda o significativa te parece?». Antes de `version_app` 1.2.0 el orden y la redacción eran otros: `valor` era «¿Cuánto valor artístico tiene esta obra?» y `agrado` era «¿Cuánto te agrada y qué tan bella te parece?»; esas respuestas no son comparables |
 | `ms_valor`, `ms_agrado`, `ms_profundidad` | ms desde que la imagen terminó de cargar hasta la **primera** respuesta a esa pregunta (incluye la espera de 4 s) |
 | `ms_ensayo` | ms desde que la imagen cargó hasta pulsar «Siguiente» |
 | `ms_carga_imagen` | ms que tardó en cargar la imagen |

@@ -8,7 +8,7 @@ import {
 } from './datos.js';
 import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.1.2';
+const VERSION_APP = '1.2.0';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -22,8 +22,8 @@ const CLAVE = claveEstado(PRUEBA);
 const ESPERA_MS = Math.max(0, Number(CFG.SEGUNDOS_ESPERA) || 0) * 1000;
 
 const PREGUNTAS = [
-  { clave: 'valor', texto: '¿Cuánto valor artístico tiene esta obra?' },
-  { clave: 'agrado', texto: '¿Cuánto te agrada y qué tan bella te parece?' },
+  { clave: 'agrado', texto: '¿Cuánto te gusta esta obra?' },
+  { clave: 'valor', texto: 'Más allá de si te gusta o no, ¿qué tan buena te parece como obra de arte?' },
   { clave: 'profundidad', texto: '¿Qué tan profunda o significativa te parece?' },
 ];
 const ETAPAS_EN_CURSO = ['practica', 'transicion', 'ensayos',
