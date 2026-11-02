@@ -1,0 +1,12 @@
+{
+  "name": "etiqueta-ia-valor-arte",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Experimento en línea: efecto de la etiqueta «IA» sobre la valoración de obras de arte",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "servidor": "node herramientas/servidor_local.mjs",
+    "manifiesto": "python herramientas/generar_manifiesto.py"
+  }
+}

@@ -1,0 +1,11 @@
+# Datos del servidor local de prueba
+datos_locales/
+
+# Imágenes fuente con nombres que delatan el origen (original/ia).
+# El sitio solo necesita img/ y manifest.json. Si quieres versionarlas,
+# usa un repositorio privado o bórrala de esta lista sabiendo que quedarán públicas.
+estimulos/
+
+node_modules/
+__pycache__/
+.claude/
