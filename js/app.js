@@ -8,7 +8,7 @@ import {
 } from './datos.js';
 import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.1.1';
+const VERSION_APP = '1.1.2';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -277,7 +277,7 @@ function pantallaInstrucciones() {
       <p class="sobrelinea">Instrucciones</p>
       <h1>Cómo funciona</h1>
       <ol class="pasos">
-        <li>Verás ${n} pinturas, una a la vez. Bajo cada una hay una ficha, como en un museo.</li>
+        <li>Verás ${n} pinturas, una a la vez. Bajo cada una hay una etiqueta, como en un museo.</li>
         <li><strong>Lo importante es que observes cada obra con detenimiento antes de responder.</strong> Tómate el tiempo que necesites. Las respuestas se activan después de unos segundos.</li>
         <li>Acércate a los detalles y recorre la imagen: usa la rueda del mouse o los botones <strong>+</strong> y <strong>−</strong>, o pellizca con dos dedos en el celular. Luego arrastra para moverte.</li>
         <li>Responde tres preguntas de 1 (<em>Nada</em>) a 7 (<em>Muchísimo</em>).</li>
@@ -484,11 +484,23 @@ function hojaChequeo(numero, cuerpo) {
     </main>`;
 }
 
+// Muestra cómo se veían las etiquetas, para que quede claro de qué se pregunta.
+function ejemploEtiquetas(texto) {
+  return `
+    <div class="ejemplo">
+      <p>${texto}</p>
+      <div class="ejemplo-etiquetas">
+        <span class="ficha">${TEXTO_ETIQUETA.original}</span>
+        <span class="ficha">${TEXTO_ETIQUETA.ia}</span>
+      </div>
+    </div>`;
+}
+
 function pantallaChequeoProposito() {
   pintar(hojaChequeo(1, `
-    <p class="previo">Terminaste las obras. Antes de cerrar, cuatro preguntas breves.</p>
-    <h1>¿Qué crees que buscaba este estudio?</h1>
-    <p class="nota">Escribe lo que pienses, aunque sea una suposición.</p>
+    <p class="previo">Ya viste todas las obras. Para terminar, te haremos 4 preguntas cortas.</p>
+    <h1>¿De qué crees que se trataba este estudio?</h1>
+    <p class="nota">Escríbelo con tus palabras. Puede ser una suposición: no hay respuestas malas.</p>
     <textarea id="texto" rows="5" maxlength="1500"></textarea>`));
   const texto = $('#texto');
   const boton = $('#seguir');
@@ -502,8 +514,9 @@ function pantallaChequeoProposito() {
 
 function pantallaChequeoCredibilidad() {
   pintar(hojaChequeo(2, `
-    <h1>¿Qué tan creíbles te parecieron las fichas de las obras?</h1>
-    ${escalaHTML('credibilidad', 'Elige un número del 1 al 7')}`));
+    ${ejemploEtiquetas('Debajo de cada obra había una <strong>etiqueta</strong> que decía de dónde venía la obra. Las etiquetas se veían así:')}
+    <h1>¿Cuánto le creíste a lo que decían las etiquetas?</h1>
+    ${escalaHTML('credibilidad', 'Elige un número: 1 es «no les creí nada» y 7 es «les creí totalmente».')}`));
   const boton = $('#seguir');
   let valor = null;
   opcionUnica($('.pregunta'), (v) => { valor = Number(v); boton.disabled = false; });
@@ -514,9 +527,11 @@ function pantallaChequeoCredibilidad() {
   });
 }
 
-function chequeoConDetalle({ numero, titulo, opciones, conDetalle, etiquetaDetalle, clave, siguiente }) {
+function chequeoConDetalle({ numero, antes = '', titulo, nota, opciones, conDetalle, etiquetaDetalle, clave, siguiente }) {
   pintar(hojaChequeo(numero, `
+    ${antes}
     <h1>${titulo}</h1>
+    <p class="nota">${nota}</p>
     <div class="opciones grandes" id="opciones">
       ${opciones.map(([v, t]) => `<button type="button" class="opcion" data-v="${v}" aria-pressed="false">${t}</button>`).join('')}
     </div>
@@ -541,10 +556,11 @@ function chequeoConDetalle({ numero, titulo, opciones, conDetalle, etiquetaDetal
 function pantallaChequeoReconocimiento() {
   chequeoConDetalle({
     numero: 3,
-    titulo: '¿Reconociste alguna de las obras?',
+    titulo: '¿Reconociste alguna de las pinturas?',
+    nota: 'Es decir, si ya la habías visto antes: en un museo, un libro, internet u otro lugar.',
     opciones: [['si', 'Sí'], ['no', 'No']],
     conDetalle: ['si'],
-    etiquetaDetalle: '¿Cuál o cuáles? Descríbelas con tus palabras',
+    etiquetaDetalle: '¿Cuál o cuáles? Si no sabes el nombre, cuenta qué aparecía en la pintura',
     clave: 'reconocio',
     siguiente: () => { ir('chequeo-ficha'); enviador.enviar(); },
   });
@@ -553,10 +569,12 @@ function pantallaChequeoReconocimiento() {
 function pantallaChequeoFicha() {
   chequeoConDetalle({
     numero: 4,
-    titulo: '¿Te pareció que alguna ficha era incorrecta?',
+    antes: ejemploEtiquetas('Piensa otra vez en las <strong>etiquetas</strong> que aparecían debajo de las obras:'),
+    titulo: '¿Sentiste que alguna etiqueta estaba equivocada?',
+    nota: 'Por ejemplo, una pintura con la etiqueta «Obra original» que a ti te pareció hecha con inteligencia artificial, o al revés.',
     opciones: [['si', 'Sí'], ['no', 'No'], ['no_se', 'No sé']],
     conDetalle: ['si', 'no_se'],
-    etiquetaDetalle: '¿Cuál y por qué te lo pareció?',
+    etiquetaDetalle: '¿Qué pintura era y por qué te lo pareció? Si no la recuerdas bien, cuéntalo como puedas',
     clave: 'ficha_incorrecta',
     siguiente: () => {
       E.completa = true;
@@ -575,8 +593,8 @@ function pantallaFinal(regreso = false) {
     const plan = E.plan.find((p) => p.par_id === f.par_id);
     const origen = f.fuente === 'original' ? 'Original del Prado' : 'Generada con IA';
     const ficha = f.etiqueta_verdadera
-      ? '<span class="sello verdadera">Ficha verdadera</span>'
-      : `<span class="sello falsa">Ficha falsa</span><span class="decia">decía «${TEXTO_ETIQUETA[f.etiqueta]}»</span>`;
+      ? '<span class="sello verdadera">Etiqueta verdadera</span>'
+      : `<span class="sello falsa">Etiqueta falsa</span><span class="decia">decía «${TEXTO_ETIQUETA[f.etiqueta]}»</span>`;
     return `
       <li>
         <div class="miniatura"><img src="${esc(plan.src)}" alt="" draggable="false" loading="lazy"></div>
@@ -595,9 +613,9 @@ function pantallaFinal(regreso = false) {
       <p>Este estudio busca saber si la etiqueta <strong>«Generada con IA»</strong> cambia cuánto valoramos una obra,
       aunque la obra sea exactamente la misma.</p>
       <p>De las obras que viste, la mitad eran pinturas originales del Museo del Prado y la otra mitad eran obras nuevas
-      generadas con inteligencia artificial en su mismo estilo. Además, <strong>algunas fichas eran falsas a propósito</strong>:
-      ${falsas ? `en tu caso, ${falsas} de ${vistas.length}.` : ''} Hubo originales con la ficha «Generada con IA» y obras
-      generadas con la ficha «Obra original».</p>
+      generadas con inteligencia artificial en su mismo estilo. Además, <strong>algunas etiquetas eran falsas a propósito</strong>:
+      ${falsas ? `en tu caso, ${falsas} de ${vistas.length}.` : ''} Hubo originales con la etiqueta «Generada con IA» y obras
+      generadas con la etiqueta «Obra original».</p>
       <p>Lo hicimos así porque es la única forma de separar el efecto de la etiqueta del efecto de la obra misma.
       Si te lo hubiéramos dicho antes, tus respuestas habrían cambiado. No hay respuestas correctas ni incorrectas:
       lo que respondiste es justo lo que necesitábamos.</p>
@@ -605,7 +623,7 @@ function pantallaFinal(regreso = false) {
       <aside class="favor">
         <h2>Un favor importante</h2>
         <p><strong>Por favor, no le cuentes de qué se trata el estudio a nadie que aún no haya participado.</strong>
-        Si alguien llega sabiendo que hay fichas falsas, sus respuestas ya no sirven y se arruina el experimento.
+        Si alguien llega sabiendo que hay etiquetas falsas, sus respuestas ya no sirven y se arruina el experimento.
         Puedes invitar a tus amigos, pero sin darles detalles.</p>
       </aside>
 

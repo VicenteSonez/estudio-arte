@@ -105,12 +105,12 @@ test('la posición de cada celda en la secuencia no tiene sesgo', () => {
   for (const s of suma) assert.ok(Math.abs(s / (n * 6) - 12.5) < 0.3, `posición media ${s / (n * 6)}`);
 });
 
-test('la práctica usa obras propias, una con cada etiqueta', () => {
+test('la práctica usa obras propias, todas con la etiqueta «Obra original»', () => {
   const srcEnsayos = new Set(pares.flatMap((p) => [p.original.src, p.ia.src]));
   for (let s = 0; s < 20; s++) {
     const pr = construirPractica(manifiesto.practica, rngSemilla(s));
     assert.equal(pr.length, 2);
-    assert.deepEqual(pr.map((e) => e.etiqueta).sort(), ['ia', 'original']);
+    assert.deepEqual(pr.map((e) => e.etiqueta), ['original', 'original']);
     for (const e of pr) assert.ok(!srcEnsayos.has(e.src), 'una obra de práctica se repite en la tarea');
   }
 });

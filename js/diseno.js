@@ -72,15 +72,14 @@ export function construirEnsayos(pares, lista, rng = azar) {
   return mezclar(ensayos, rng).map((e, k) => ({ ...e, orden: k + 1 }));
 }
 
-// Práctica: las obras en orden aleatorio, con etiquetas alternadas
-// (con 2 obras, una de cada etiqueta) y cuál va primero también al azar.
+// Práctica: las obras en orden aleatorio. Son pinturas reales, así que todas
+// llevan la etiqueta «Obra original».
 export function construirPractica(practica, rng = azar) {
-  const etiquetas = mezclar(['original', 'ia'], rng);
   return mezclar(practica, rng).map((obra, k) => ({
     par_id: obra.id,
     celda: '',
     fuente: 'practica',
-    etiqueta: etiquetas[k % 2],
+    etiqueta: 'original',
     etiqueta_verdadera: '',
     src: obra.src,
     ancho: obra.ancho,
