@@ -8,7 +8,7 @@ import {
 } from './datos.js';
 import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.1.0';
+const VERSION_APP = '1.1.1';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -321,7 +321,7 @@ function pantallaEnsayo(bloque) {
         <span class="pista" aria-hidden="true"><span style="width:${avance}%"></span></span>
       </header>
       <figure class="obra">
-        <div class="lienzo"><div class="marco cargando">
+        <div class="lienzo" style="--proporcion: ${e.alto / e.ancho}"><div class="marco cargando">
           <div class="visor" tabindex="0" aria-label="Obra. Usa + y − para acercarte y las flechas para moverte.">
             <img alt="Obra" draggable="false">
           </div>
