@@ -6,8 +6,9 @@ import {
   claveEstado, leerLocal, escribirLocal, borrarLocal, idAleatorio, pedirLista,
   crearEnviador, aCsv, descargar, describirDispositivo,
 } from './datos.js';
+import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.0.0';
+const VERSION_APP = '1.1.0';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -277,7 +278,8 @@ function pantallaInstrucciones() {
       <h1>Cómo funciona</h1>
       <ol class="pasos">
         <li>Verás ${n} pinturas, una a la vez. Bajo cada una hay una ficha, como en un museo.</li>
-        <li>Mira cada obra con calma. Las respuestas se activan después de unos segundos.</li>
+        <li><strong>Lo importante es que observes cada obra con detenimiento antes de responder.</strong> Tómate el tiempo que necesites. Las respuestas se activan después de unos segundos.</li>
+        <li>Acércate a los detalles y recorre la imagen: usa la rueda del mouse o los botones <strong>+</strong> y <strong>−</strong>, o pellizca con dos dedos en el celular. Luego arrastra para moverte.</li>
         <li>Responde tres preguntas de 1 (<em>Nada</em>) a 7 (<em>Muchísimo</em>).</li>
         <li>No hay respuestas correctas ni incorrectas: nos interesa tu impresión.</li>
         <li>No podrás volver atrás, así que responde con tranquilidad antes de seguir.</li>
@@ -319,9 +321,19 @@ function pantallaEnsayo(bloque) {
         <span class="pista" aria-hidden="true"><span style="width:${avance}%"></span></span>
       </header>
       <figure class="obra">
-        <div class="lienzo"><div class="marco cargando"><img alt="Obra" draggable="false"></div></div>
+        <div class="lienzo"><div class="marco cargando">
+          <div class="visor" tabindex="0" aria-label="Obra. Usa + y − para acercarte y las flechas para moverte.">
+            <img alt="Obra" draggable="false">
+          </div>
+          <div class="zoom-botones">
+            <button type="button" class="zoom-completa" id="zoom-completa" hidden>Ver completa</button>
+            <button type="button" id="zoom-alejar" aria-label="Alejar">−</button>
+            <button type="button" id="zoom-acercar" aria-label="Acercar">+</button>
+          </div>
+        </div></div>
         <figcaption class="ficha"><span>${TEXTO_ETIQUETA[e.etiqueta]}</span></figcaption>
         <div class="espera" aria-hidden="true"><span></span></div>
+        <p class="consejo">Obsérvala con calma: acércate y recórrela antes de responder.</p>
         <p class="error" hidden id="error-img">No se pudo cargar la imagen.
           <button type="button" class="enlace" id="reintentar">Reintentar</button></p>
       </figure>
@@ -347,7 +359,15 @@ function pantallaEnsayo(bloque) {
   let msCarga = null;
   const tPedido = performance.now();
 
-  const ajustar = () => ajustarImagen(lienzo, marco, img, e.ancho, e.alto);
+  const visor = activarVisor($('.visor', marco), img, {
+    acercar: $('#zoom-acercar'),
+    alejar: $('#zoom-alejar'),
+    completa: $('#zoom-completa'),
+  });
+  const ajustar = () => {
+    ajustarImagen(lienzo, marco, img, e.ancho, e.alto);
+    visor.reencuadrar();
+  };
   const observador = new ResizeObserver(ajustar);
   observador.observe(lienzo);
   ajustar();
@@ -387,7 +407,7 @@ function pantallaEnsayo(bloque) {
   siguiente.addEventListener('click', () => {
     siguiente.disabled = true;
     observador.disconnect();
-    registrarEnsayo(bloque, e, resp, ms, Math.round(performance.now() - t0), msCarga);
+    registrarEnsayo(bloque, e, resp, ms, Math.round(performance.now() - t0), msCarga, visor.zoomMaximo());
     avanzar(bloque);
   }, { once: true });
 
@@ -409,7 +429,7 @@ function ajustarImagen(lienzo, marco, img, ancho, alto) {
   img.style.height = `${Math.floor(alto * s)}px`;
 }
 
-function registrarEnsayo(bloque, e, resp, ms, msEnsayo, msCarga) {
+function registrarEnsayo(bloque, e, resp, ms, msEnsayo, msCarga, zoomMax = '') {
   const practica = bloque === 'practica';
   const uid = `${E.participante_id}-${practica ? 'p' : 'e'}${e.orden}`;
   if (E.filas.some((f) => f.uid === uid)) return;
@@ -432,6 +452,7 @@ function registrarEnsayo(bloque, e, resp, ms, msEnsayo, msCarga) {
     ms_profundidad: ms.profundidad ?? '',
     ms_ensayo: msEnsayo,
     ms_carga_imagen: msCarga ?? '',
+    zoom_max: zoomMax,
     timestamp: new Date().toISOString(),
     modo_prueba: E.modo_prueba,
     version_app: VERSION_APP,

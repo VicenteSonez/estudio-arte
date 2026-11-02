@@ -205,6 +205,37 @@ input:focus, textarea:focus { outline: 2px solid var(--dorado); outline-offset: 
 .marco img { display: block; opacity: 1; transition: opacity .15s; }
 .marco.cargando img { opacity: 0; }
 .marco.cargando { background: var(--papel-2); }
+.marco { position: relative; }
+
+/* Visor: la imagen se amplía por dentro, sin cambiar el tamaño del marco. */
+.visor { overflow: hidden; touch-action: none; cursor: zoom-in; }
+.visor.ampliada { cursor: grab; }
+.visor.ampliada:active { cursor: grabbing; }
+.visor:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
+.visor img { transform-origin: 0 0; }
+
+.zoom-botones { position: absolute; right: 16px; bottom: 16px; display: flex; gap: 4px; line-height: 1.2; }
+.marco.cargando .zoom-botones { display: none; }
+.zoom-botones button {
+  min-width: 40px;
+  height: 40px;
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  background: rgba(251, 248, 241, .92);
+  font-size: 22px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.zoom-botones .zoom-completa { padding: 0 10px; font-size: 15px; }
+.zoom-botones button:disabled { color: var(--tinta-suave); cursor: default; }
+.zoom-botones button:focus-visible { outline: 2px solid var(--dorado); outline-offset: 1px; }
+/* En el celular la obra es chica: los botones no deben taparla. */
+@media (max-width: 600px) {
+  .zoom-botones button { min-width: 30px; height: 30px; font-size: 18px; line-height: 1; padding: 0; background: rgba(251, 248, 241, .8); }
+  .zoom-botones .zoom-completa { padding: 0 8px; font-size: 13px; }
+}
+
+.consejo { flex: none; margin: 6px 0 0; font-size: 15px; line-height: 1.25; font-style: italic; color: var(--tinta-media); text-align: center; }
 
 /* La imagen no se puede arrastrar, seleccionar ni guardar con pulsación larga. */
 .marco img, .miniatura img {

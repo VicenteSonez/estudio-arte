@@ -1,318 +1,318 @@
 {
-  "generado": "2026-11-02T19:02:49+00:00",
-  "lado_largo": 1024,
+  "generado": "2026-11-02T19:12:07+00:00",
+  "lado_largo": 1600,
   "n_pares": 24,
   "pares": [
     {
       "id": "01",
       "original": {
         "src": "img/99212ff4f013.jpg",
-        "ancho": 855,
-        "alto": 1024
+        "ancho": 1337,
+        "alto": 1600
       },
       "ia": {
         "src": "img/abf19ff18263.jpg",
-        "ancho": 825,
-        "alto": 1024
+        "ancho": 1289,
+        "alto": 1600
       }
     },
     {
       "id": "02",
       "original": {
         "src": "img/b5944cb7542d.jpg",
-        "ancho": 1024,
-        "alto": 865
+        "ancho": 1600,
+        "alto": 1352
       },
       "ia": {
         "src": "img/22b18fe1996a.jpg",
-        "ancho": 1024,
-        "alto": 825
+        "ancho": 1600,
+        "alto": 1289
       }
     },
     {
       "id": "03",
       "original": {
         "src": "img/8e08f9b68c06.jpg",
-        "ancho": 1024,
-        "alto": 746
+        "ancho": 1600,
+        "alto": 1166
       },
       "ia": {
         "src": "img/b8da8f968876.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "04",
       "original": {
         "src": "img/95de69ecf76d.jpg",
-        "ancho": 1024,
-        "alto": 711
+        "ancho": 1600,
+        "alto": 1112
       },
       "ia": {
         "src": "img/545c7582c152.jpg",
-        "ancho": 1024,
-        "alto": 687
+        "ancho": 1600,
+        "alto": 1073
       }
     },
     {
       "id": "05",
       "original": {
         "src": "img/c68fbfca78ed.jpg",
-        "ancho": 766,
-        "alto": 1024
+        "ancho": 1197,
+        "alto": 1600
       },
       "ia": {
         "src": "img/9bb887c9f3f3.jpg",
-        "ancho": 765,
-        "alto": 1024
+        "ancho": 1195,
+        "alto": 1600
       }
     },
     {
       "id": "06",
       "original": {
         "src": "img/be9490f0a922.jpg",
-        "ancho": 1024,
-        "alto": 833
+        "ancho": 1600,
+        "alto": 1302
       },
       "ia": {
         "src": "img/a182e93d47e7.jpg",
-        "ancho": 1024,
-        "alto": 825
+        "ancho": 1600,
+        "alto": 1289
       }
     },
     {
       "id": "07",
       "original": {
         "src": "img/e7e914fbd93b.jpg",
-        "ancho": 694,
-        "alto": 1024
+        "ancho": 1085,
+        "alto": 1600
       },
       "ia": {
         "src": "img/684ec53115a1.jpg",
-        "ancho": 687,
-        "alto": 1024
+        "ancho": 1073,
+        "alto": 1600
       }
     },
     {
       "id": "08",
       "original": {
         "src": "img/a10583494c67.jpg",
-        "ancho": 1024,
-        "alto": 731
+        "ancho": 1600,
+        "alto": 1142
       },
       "ia": {
         "src": "img/17fa8a2f1c1d.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "09",
       "original": {
         "src": "img/4b47f9962800.jpg",
-        "ancho": 1024,
-        "alto": 630
+        "ancho": 1600,
+        "alto": 984
       },
       "ia": {
         "src": "img/bf234f5a26b4.jpg",
-        "ancho": 1024,
-        "alto": 687
+        "ancho": 1600,
+        "alto": 1073
       }
     },
     {
       "id": "10",
       "original": {
         "src": "img/fc153d8f4201.jpg",
-        "ancho": 719,
-        "alto": 1024
+        "ancho": 1123,
+        "alto": 1600
       },
       "ia": {
         "src": "img/eaefa4675250.jpg",
-        "ancho": 687,
-        "alto": 1024
+        "ancho": 1073,
+        "alto": 1600
       }
     },
     {
       "id": "11",
       "original": {
         "src": "img/7e669e89c26b.jpg",
-        "ancho": 1024,
-        "alto": 749
+        "ancho": 1600,
+        "alto": 1171
       },
       "ia": {
         "src": "img/5f7ed2f0500f.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "12",
       "original": {
         "src": "img/6ef781f7849b.jpg",
-        "ancho": 1024,
-        "alto": 679
+        "ancho": 1600,
+        "alto": 1062
       },
       "ia": {
         "src": "img/1888dfd61088.jpg",
-        "ancho": 1024,
-        "alto": 687
+        "ancho": 1600,
+        "alto": 1073
       }
     },
     {
       "id": "13",
       "original": {
         "src": "img/f138ed0c16c2.jpg",
-        "ancho": 715,
-        "alto": 1024
+        "ancho": 1117,
+        "alto": 1600
       },
       "ia": {
         "src": "img/78de5bf55dac.jpg",
-        "ancho": 687,
-        "alto": 1024
+        "ancho": 1073,
+        "alto": 1600
       }
     },
     {
       "id": "14",
       "original": {
         "src": "img/7664c819d2dd.jpg",
-        "ancho": 1024,
-        "alto": 786
+        "ancho": 1600,
+        "alto": 1228
       },
       "ia": {
         "src": "img/ece000d4985d.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "15",
       "original": {
         "src": "img/6e6ee00f5fb0.jpg",
-        "ancho": 1024,
-        "alto": 724
+        "ancho": 1600,
+        "alto": 1132
       },
       "ia": {
         "src": "img/4fc04cb44de2.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "16",
       "original": {
         "src": "img/344218b11637.jpg",
-        "ancho": 1024,
-        "alto": 671
+        "ancho": 1600,
+        "alto": 1049
       },
       "ia": {
         "src": "img/37dae0a581f3.jpg",
-        "ancho": 1024,
-        "alto": 765
+        "ancho": 1600,
+        "alto": 1195
       }
     },
     {
       "id": "17",
       "original": {
         "src": "img/9f3955211962.jpg",
-        "ancho": 1024,
-        "alto": 698
+        "ancho": 1600,
+        "alto": 1090
       },
       "ia": {
         "src": "img/9b9b1ad84344.jpg",
-        "ancho": 1024,
-        "alto": 687
+        "ancho": 1600,
+        "alto": 1073
       }
     },
     {
       "id": "18",
       "original": {
         "src": "img/cfef7cbacc80.jpg",
-        "ancho": 787,
-        "alto": 1024
+        "ancho": 1230,
+        "alto": 1600
       },
       "ia": {
         "src": "img/5fdccf3e6ca8.jpg",
-        "ancho": 765,
-        "alto": 1024
+        "ancho": 1195,
+        "alto": 1600
       }
     },
     {
       "id": "19",
       "original": {
         "src": "img/e2c0466f7bfd.jpg",
-        "ancho": 1024,
-        "alto": 634
+        "ancho": 1600,
+        "alto": 990
       },
       "ia": {
         "src": "img/50598c58c153.jpg",
-        "ancho": 1024,
-        "alto": 687
+        "ancho": 1600,
+        "alto": 1073
       }
     },
     {
       "id": "20",
       "original": {
         "src": "img/31dbbd9bad13.jpg",
-        "ancho": 1024,
-        "alto": 834
+        "ancho": 1600,
+        "alto": 1303
       },
       "ia": {
         "src": "img/059a59ca2afe.jpg",
-        "ancho": 1024,
-        "alto": 825
+        "ancho": 1600,
+        "alto": 1289
       }
     },
     {
       "id": "21",
       "original": {
         "src": "img/4c64a95236c7.jpg",
-        "ancho": 1024,
-        "alto": 883
+        "ancho": 1600,
+        "alto": 1380
       },
       "ia": {
         "src": "img/56f3fb7db368.jpg",
-        "ancho": 1024,
-        "alto": 825
+        "ancho": 1600,
+        "alto": 1289
       }
     },
     {
       "id": "22",
       "original": {
         "src": "img/739ea0cc2d50.jpg",
-        "ancho": 806,
-        "alto": 1024
+        "ancho": 1259,
+        "alto": 1600
       },
       "ia": {
         "src": "img/dbf700a132ff.jpg",
-        "ancho": 825,
-        "alto": 1024
+        "ancho": 1289,
+        "alto": 1600
       }
     },
     {
       "id": "23",
       "original": {
         "src": "img/9c123e05ff1b.jpg",
-        "ancho": 1024,
-        "alto": 594
+        "ancho": 1600,
+        "alto": 928
       },
       "ia": {
         "src": "img/afbb95c13791.jpg",
-        "ancho": 1024,
-        "alto": 572
+        "ancho": 1600,
+        "alto": 893
       }
     },
     {
       "id": "24",
       "original": {
         "src": "img/6af599389311.jpg",
-        "ancho": 842,
-        "alto": 1024
+        "ancho": 1315,
+        "alto": 1600
       },
       "ia": {
         "src": "img/c1af08121631.jpg",
-        "ancho": 825,
-        "alto": 1024
+        "ancho": 1289,
+        "alto": 1600
       }
     }
   ],
@@ -320,14 +320,14 @@
     {
       "id": "p1",
       "src": "img/beee1ba7145c.jpg",
-      "ancho": 867,
-      "alto": 1024
+      "ancho": 1355,
+      "alto": 1600
     },
     {
       "id": "p2",
       "src": "img/53d6b3b68217.jpg",
-      "ancho": 569,
-      "alto": 1024
+      "ancho": 888,
+      "alto": 1600
     }
   ]
 }

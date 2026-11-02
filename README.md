@@ -11,6 +11,7 @@ config.js             ← lo único que hay que editar para publicar
 css/estilo.css
 js/diseno.js          cuadrado latino y armado de ensayos (puro, testeado)
 js/datos.js           localStorage, envío con reintentos, CSV
+js/visor.js           zoom y desplazamiento de la obra
 js/app.js             pantallas y flujo
 manifest.json         lo genera el script; lo lee la app
 img/                  imágenes procesadas, con nombres opacos (las genera el script)
@@ -48,8 +49,8 @@ El script:
 
 - valida que cada par tenga sus dos imágenes y que haya un múltiplo de 4 pares
   (avisa si no son exactamente 24);
-- convierte todo a JPEG con **1024 px de lado largo**, así originales e IA quedan
-  del mismo tamaño, y **sin metadatos** (los generadores de IA dejan marcas en EXIF/XMP);
+- convierte todo a JPEG con **1600 px de lado largo**, así originales e IA quedan
+  con la misma resolución al hacer zoom, y **sin metadatos** (los generadores de IA dejan marcas en EXIF/XMP);
 - guarda las imágenes en `img/` con **nombres opacos** (p. ej. `img/99212ff4f013.jpg`),
   para que la dirección de una imagen no delate si es original o IA;
 - escribe `manifest.json`.
@@ -191,6 +192,7 @@ pantalla final todavía hay datos sin enviar, aparece un enlace para descargarlo
 | `ms_valor`, `ms_agrado`, `ms_profundidad` | ms desde que la imagen terminó de cargar hasta la **primera** respuesta a esa pregunta (incluye la espera de 4 s) |
 | `ms_ensayo` | ms desde que la imagen cargó hasta pulsar «Siguiente» |
 | `ms_carga_imagen` | ms que tardó en cargar la imagen |
+| `zoom_max` | mayor zoom usado en la obra (1 = no se acercó, 4 = máximo) |
 | `timestamp` | hora (ISO, UTC) al pulsar «Siguiente» |
 | `modo_prueba`, `version_app` | control |
 

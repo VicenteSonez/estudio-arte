@@ -9,7 +9,7 @@ Estructura esperada:
 Qué hace:
     1. Valida que cada par tenga sus dos imágenes y que el número de pares sea
        múltiplo de 4 (lo exige el cuadrado latino).
-    2. Convierte cada imagen a JPEG con 1024 px de lado largo y sin metadatos
+    2. Convierte cada imagen a JPEG con 1600 px de lado largo y sin metadatos
        (los generadores de IA suelen dejar marcas en EXIF/XMP).
     3. La guarda en img/ con un nombre opaco, para que la URL no delate el
        origen real (p. ej. «ia/07.jpg»).
@@ -39,7 +39,7 @@ FUENTE = RAIZ / "estimulos"
 SALIDA = RAIZ / "img"
 MANIFIESTO = RAIZ / "manifest.json"
 EXTENSIONES = (".jpg", ".jpeg", ".jfif", ".png", ".webp")
-LADO_LARGO = 1024
+LADO_LARGO = 1600
 CALIDAD_JPEG = 86
 # Cambiar la sal cambia todos los nombres de img/ (útil si se filtraron).
 SAL = "eiva-2026"
