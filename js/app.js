@@ -8,7 +8,7 @@ import {
 } from './datos.js';
 import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.2.0';
+const VERSION_APP = '1.3.0';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -27,7 +27,7 @@ const PREGUNTAS = [
   { clave: 'profundidad', texto: '¿Qué tan profunda o significativa te parece?' },
 ];
 const ETAPAS_EN_CURSO = ['practica', 'transicion', 'ensayos',
-  'chequeo-proposito', 'chequeo-credibilidad', 'chequeo-reconocimiento', 'chequeo-ficha'];
+  'chequeo-credibilidad', 'chequeo-reconocimiento', 'chequeo-ficha'];
 
 const app = document.getElementById('app');
 let E = null;          // estado de la sesión (se guarda en localStorage)
@@ -78,7 +78,6 @@ function filaSesion() {
     lista_origen: E.lista_origen,
     edad: E.edad,
     genero: E.genero,
-    chequeo_proposito: c.proposito ?? '',
     chequeo_credibilidad: c.credibilidad ?? '',
     chequeo_reconocio: c.reconocio ?? '',
     chequeo_reconocio_cual: c.reconocio_cual ?? '',
@@ -464,7 +463,7 @@ function avanzar(bloque) {
   E.indice += 1;
   if (E.indice >= plan.length) {
     E.indice = 0;
-    E.etapa = bloque === 'practica' ? 'transicion' : 'chequeo-proposito';
+    E.etapa = bloque === 'practica' ? 'transicion' : 'chequeo-credibilidad';
   }
   guardar();
   enviador.enviar();
@@ -478,7 +477,7 @@ function avanzar(bloque) {
 function hojaChequeo(numero, cuerpo) {
   return `
     <main class="hoja">
-      <p class="sobrelinea">Últimas preguntas · ${numero} de 4</p>
+      <p class="sobrelinea">Últimas preguntas · ${numero} de 3</p>
       ${cuerpo}
       <button class="primario" id="seguir" disabled>Siguiente</button>
     </main>`;
@@ -496,24 +495,9 @@ function ejemploEtiquetas(texto) {
     </div>`;
 }
 
-function pantallaChequeoProposito() {
-  pintar(hojaChequeo(1, `
-    <p class="previo">Ya viste todas las obras. Para terminar, te haremos 4 preguntas cortas.</p>
-    <h1>¿De qué crees que se trataba este estudio?</h1>
-    <p class="nota">Escríbelo con tus palabras. Puede ser una suposición: no hay respuestas malas.</p>
-    <textarea id="texto" rows="5" maxlength="1500"></textarea>`));
-  const texto = $('#texto');
-  const boton = $('#seguir');
-  texto.addEventListener('input', () => { boton.disabled = texto.value.trim().length < 2; });
-  boton.addEventListener('click', () => {
-    E.chequeos.proposito = texto.value.trim();
-    ir('chequeo-credibilidad');
-    enviador.enviar();
-  });
-}
-
 function pantallaChequeoCredibilidad() {
-  pintar(hojaChequeo(2, `
+  pintar(hojaChequeo(1, `
+    <p class="previo">Ya viste todas las obras. Para terminar, te haremos 3 preguntas cortas.</p>
     ${ejemploEtiquetas('Debajo de cada obra había una <strong>etiqueta</strong> que decía de dónde venía la obra. Las etiquetas se veían así:')}
     <h1>¿Cuánto le creíste a lo que decían las etiquetas?</h1>
     ${escalaHTML('credibilidad', 'Elige un número: 1 es «no les creí nada» y 7 es «les creí totalmente».')}`));
@@ -555,7 +539,7 @@ function chequeoConDetalle({ numero, antes = '', titulo, nota, opciones, conDeta
 
 function pantallaChequeoReconocimiento() {
   chequeoConDetalle({
-    numero: 3,
+    numero: 2,
     titulo: '¿Reconociste alguna de las pinturas?',
     nota: 'Es decir, si ya la habías visto antes: en un museo, un libro, internet u otro lugar.',
     opciones: [['si', 'Sí'], ['no', 'No']],
@@ -568,7 +552,7 @@ function pantallaChequeoReconocimiento() {
 
 function pantallaChequeoFicha() {
   chequeoConDetalle({
-    numero: 4,
+    numero: 3,
     antes: ejemploEtiquetas('Piensa otra vez en las <strong>etiquetas</strong> que aparecían debajo de las obras:'),
     titulo: '¿Sentiste que alguna etiqueta estaba equivocada?',
     nota: 'Por ejemplo, una pintura con la etiqueta «Obra original» que a ti te pareció hecha con inteligencia artificial, o al revés.',
@@ -747,7 +731,6 @@ function mostrar() {
     practica: () => pantallaEnsayo('practica'),
     transicion: pantallaTransicion,
     ensayos: () => pantallaEnsayo('ensayos'),
-    'chequeo-proposito': pantallaChequeoProposito,
     'chequeo-credibilidad': pantallaChequeoCredibilidad,
     'chequeo-reconocimiento': pantallaChequeoReconocimiento,
     'chequeo-ficha': pantallaChequeoFicha,
@@ -826,6 +809,8 @@ async function iniciar() {
     mostrar();
     return;
   }
+  // Sesiones guardadas con la versión 1.2, que aún tenía la pregunta de propósito.
+  if (E.etapa === 'chequeo-proposito') E.etapa = 'chequeo-credibilidad';
   if (E.etapa === 'final') {
     pantallaFinal(true);
     pintarPanelPrueba();

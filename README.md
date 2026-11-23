@@ -204,7 +204,6 @@ En los ensayos saltados en modo prueba los tiempos quedan vacíos o en 0.
 | --- | --- |
 | `participante_id`, `lista`, `lista_origen` | `lista_origen`: `servidor`, `url` o `aleatoria` |
 | `edad`, `genero` | `genero` vacío si no respondió |
-| `chequeo_proposito` | «¿Qué crees que buscaba este estudio?» |
 | `chequeo_credibilidad` | cuánto le creyó a las etiquetas, 1–7 |
 | `chequeo_reconocio`, `chequeo_reconocio_cual` | `si`/`no` + texto opcional |
 | `chequeo_ficha_incorrecta`, `chequeo_ficha_cual` | `si`/`no`/`no_se` + texto opcional |
