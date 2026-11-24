@@ -185,7 +185,7 @@ pantalla final todavía hay datos sin enviar, aparece un enlace para descargarlo
 | `orden` | posición en el bloque (1–24, o 1–2 en práctica) |
 | `par_id` | `01`–`24`, o `p1`/`p2` en práctica |
 | `fuente` | `original` / `ia` (`practica` en práctica) |
-| `etiqueta` | etiqueta mostrada: `original` / `ia` |
+| `etiqueta` | etiqueta mostrada: `original` / `ia`. Desde `version_app` 1.4.0 aparece pequeña y translúcida dentro de la obra, abajo a la izquierda; antes iba debajo del marco, más grande. Son presentaciones distintas de la manipulación: conviene analizarlas por separado |
 | `etiqueta_verdadera` | TRUE si `fuente == etiqueta` (vacío en práctica) |
 | `celda` | 0–3 según la tabla de arriba |
 | `agrado`, `valor`, `profundidad` | respuestas 1–7, en el orden en que se preguntan. `agrado`: «¿Cuánto te gusta esta obra?». `valor`: «Más allá de si te gusta o no, ¿qué tan buena te parece como obra de arte?». `profundidad`: «¿Qué tan profunda o significativa te parece?». Antes de `version_app` 1.2.0 el orden y la redacción eran otros: `valor` era «¿Cuánto valor artístico tiene esta obra?» y `agrado` era «¿Cuánto te agrada y qué tan bella te parece?»; esas respuestas no son comparables |

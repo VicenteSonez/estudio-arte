@@ -8,7 +8,7 @@ import {
 } from './datos.js';
 import { activarVisor } from './visor.js';
 
-const VERSION_APP = '1.3.0';
+const VERSION_APP = '1.4.0';
 
 const CFG = Object.assign(
   { URL_APPS_SCRIPT: '', SEGUNDOS_ESPERA: 4, MODO_PRUEBA: false, CONTACTO: '' },
@@ -174,7 +174,6 @@ function pantallaConsentimiento() {
       <p>Te invitamos a participar en un estudio sobre cómo las personas valoran obras de arte.
       Verás una serie de pinturas y responderás tres preguntas breves sobre cada una.</p>
       <dl class="claves">
-        <div><dt>Duración</dt><dd>Entre 10 y 12 minutos.</dd></div>
         <div><dt>Anónimo</dt><dd>No pedimos tu nombre ni datos de contacto; solo tu edad y, si quieres, tu género.</dd></div>
         <div><dt>Voluntario</dt><dd>Puedes dejarlo cuando quieras cerrando la página. Las respuestas que alcances a dar quedarán guardadas.</dd></div>
         <div><dt>Requisito</dt><dd>Solo pueden participar personas mayores de 18 años.</dd></div>
@@ -276,7 +275,7 @@ function pantallaInstrucciones() {
       <p class="sobrelinea">Instrucciones</p>
       <h1>Cómo funciona</h1>
       <ol class="pasos">
-        <li>Verás ${n} pinturas, una a la vez. Bajo cada una hay una etiqueta, como en un museo.</li>
+        <li>Verás ${n} pinturas, una a la vez. En una esquina de cada una hay una etiqueta.</li>
         <li><strong>Lo importante es que observes cada obra con detenimiento antes de responder.</strong> Tómate el tiempo que necesites. Las respuestas se activan después de unos segundos.</li>
         <li>Acércate a los detalles y recorre la imagen: usa la rueda del mouse o los botones <strong>+</strong> y <strong>−</strong>, o pellizca con dos dedos en el celular. Luego arrastra para moverte.</li>
         <li>Responde tres preguntas de 1 (<em>Nada</em>) a 7 (<em>Muchísimo</em>).</li>
@@ -329,8 +328,8 @@ function pantallaEnsayo(bloque) {
             <button type="button" id="zoom-alejar" aria-label="Alejar">−</button>
             <button type="button" id="zoom-acercar" aria-label="Acercar">+</button>
           </div>
+          <span class="ficha">${TEXTO_ETIQUETA[e.etiqueta]}</span>
         </div></div>
-        <figcaption class="ficha"><span>${TEXTO_ETIQUETA[e.etiqueta]}</span></figcaption>
         <div class="espera" aria-hidden="true"><span></span></div>
         <p class="consejo">Obsérvala con calma: acércate y recórrela antes de responder.</p>
         <p class="error" hidden id="error-img">No se pudo cargar la imagen.
@@ -498,7 +497,7 @@ function ejemploEtiquetas(texto) {
 function pantallaChequeoCredibilidad() {
   pintar(hojaChequeo(1, `
     <p class="previo">Ya viste todas las obras. Para terminar, te haremos 3 preguntas cortas.</p>
-    ${ejemploEtiquetas('Debajo de cada obra había una <strong>etiqueta</strong> que decía de dónde venía la obra. Las etiquetas se veían así:')}
+    ${ejemploEtiquetas('En una esquina de cada obra había una <strong>etiqueta</strong> que decía de dónde venía la obra. Las etiquetas se veían así:')}
     <h1>¿Cuánto le creíste a lo que decían las etiquetas?</h1>
     ${escalaHTML('credibilidad', 'Elige un número: 1 es «no les creí nada» y 7 es «les creí totalmente».')}`));
   const boton = $('#seguir');
@@ -553,7 +552,7 @@ function pantallaChequeoReconocimiento() {
 function pantallaChequeoFicha() {
   chequeoConDetalle({
     numero: 3,
-    antes: ejemploEtiquetas('Piensa otra vez en las <strong>etiquetas</strong> que aparecían debajo de las obras:'),
+    antes: ejemploEtiquetas('Piensa otra vez en las <strong>etiquetas</strong> que aparecían en una esquina de las obras:'),
     titulo: '¿Sentiste que alguna etiqueta estaba equivocada?',
     nota: 'Por ejemplo, una pintura con la etiqueta «Obra original» que a ti te pareció hecha con inteligencia artificial, o al revés.',
     opciones: [['si', 'Sí'], ['no', 'No'], ['no_se', 'No sé']],
